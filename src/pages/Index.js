@@ -15,7 +15,9 @@ const Index = () => {
   return (
     <div>
         <Header/>    
-
+        <Sidebar/>
+        <Content/>
+        <Footer/>
     </div>
   )
 }
