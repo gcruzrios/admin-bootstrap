@@ -31,7 +31,7 @@ const DataTable = () => {
 
 
   const eliminar_completo = async (id) => {
-    //const respuesta = await axios.delete(`api/contactos/${id}`);
+    const respuesta = await axios.delete(`api/contactos/${id}`);
     peticionGet();
   }  
   const eliminar = async (id) => {
