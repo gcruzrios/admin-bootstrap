@@ -29,18 +29,32 @@ const DataTable = () => {
     });
   };
 
-  const eliminar = async (id) => {
-    const token = localStorage.getItem("Token");
-    const respuesta = await axios.delete(`api/contactos/${id}`);
 
-    //const mensaje = respuesta.data.mensaje;
-    Swal.fire({
-      icon: "success",
-      title: "Contacto Borrado",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+  const eliminar_completo = async (id) => {
+    //const respuesta = await axios.delete(`api/contactos/${id}`);
     peticionGet();
+  }  
+  const eliminar = async (id) => {
+
+
+    Swal.fire({
+      title: 'Está seguro de borrar el registro?',
+      showDenyButton: false,
+      showCancelButton: true,
+      confirmButtonText: 'Borrar',
+      denyButtonText: `No borrar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+
+        eliminar_completo(id);
+        Swal.fire('Contacto borrado!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('El contacto no ha sido borrado', '', 'info')
+      }
+    })
+    
+   
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
