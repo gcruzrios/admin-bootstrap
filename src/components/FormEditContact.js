@@ -18,6 +18,11 @@ const FormAddContact = () => {
     const response = await axios.get(`/api/contactos/${id}`);
     const mensaje = response.data;
     setData(mensaje);
+    setNombre(mensaje.nombre);
+    setTelefono(mensaje.telefono);
+    setCelular(mensaje.celular);
+    setEmail(mensaje.email);
+        
     console.log(mensaje);
     
   }
@@ -100,7 +105,7 @@ const FormAddContact = () => {
                         Nombre
                       </label>
                       <div className="col-sm-10">
-                        <input type="text" className="form-control" value={data.nombre}  onChange={(e) => setNombre(e.target.value)}/>
+                        <input type="text" className="form-control" value={nombre}  onChange={(e) => setNombre(e.target.value)}/>
                       </div>
                     </div>
                     <div className="row mb-3">
@@ -111,7 +116,7 @@ const FormAddContact = () => {
                         Teléfono
                       </label>
                       <div className="col-sm-10">
-                        <input type="text" className="form-control" value={data.telefono}  onChange={(e) => setTelefono(e.target.value)} />
+                        <input type="text" className="form-control" value={telefono}  onChange={(e) => setTelefono(e.target.value)} />
                       </div>
                     </div>
                     <div className="row mb-3">
@@ -122,7 +127,7 @@ const FormAddContact = () => {
                         Celular
                       </label>
                       <div className="col-sm-10">
-                        <input type="text" className="form-control" value={data.celular} onChange={(e) => setCelular(e.target.value)}/>
+                        <input type="text" className="form-control" value={celular} onChange={(e) => setCelular(e.target.value)}/>
                       </div>
                     </div>
                     <div className="row mb-3">
@@ -133,7 +138,7 @@ const FormAddContact = () => {
                         Email
                       </label>
                       <div className="col-sm-10">
-                        <input type="email" className="form-control" value={data.email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/>
                       </div>
                     </div>
                     {/* <div className="row mb-3">
