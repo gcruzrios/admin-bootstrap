@@ -6,13 +6,16 @@ const Header = () => {
     const Token = localStorage.getItem('Token');
     const [menu, setMenu] = useState(false);
     const [nombre, setNombre] = useState('');
+    const [role, setRole] = useState('');
+    
     
 
     useEffect(() => {
         if (Token) {
             
             var decoded = jwt_decode(Token);
-            setNombre(decoded.sub);
+            setNombre(decoded.name);
+            setRole(decoded.sub);
             //console.log(decoded.sub);
             setMenu(true);
         }

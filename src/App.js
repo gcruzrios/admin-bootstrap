@@ -17,6 +17,7 @@ import {
 import AddContact from './pages/AddContact';
 import DetalleContact from './pages/DetalleContact';
 import EditContact from './pages/EditContact';
+import Registro from './pages/Registro';
 
 
 const estaAutenticado = () => {
@@ -38,7 +39,7 @@ function App() {
           renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" exact element={<Login />} />
-
+          <Route path="/registro" exact element={<Registro />} />
           {/* <Route
             exact
             path="/index"
