@@ -31,18 +31,16 @@ const DataTable = () => {
 
   const eliminar = async (id) => {
     const token = localStorage.getItem("Token");
-    // const respuesta = await axios.delete(`/empleado/eliminar/${id}`, {
-    //   headers: { token: token },
-    // });
+    const respuesta = await axios.delete(`api/contactos/${id}`);
 
     //const mensaje = respuesta.data.mensaje;
     Swal.fire({
       icon: "success",
-      title: "Obs Borrada",
+      title: "Contacto Borrado",
       showConfirmButton: false,
       timer: 1500,
     });
-    //obtenerEmpleados();
+    peticionGet();
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -134,12 +132,14 @@ const DataTable = () => {
                                   <i class="bi bi-pencil-square"></i>
                                 </Link>
                               
-                                <Link
+                                <button className="btn btn-danger" onClick={()=>eliminar(obs.id)}><i class="bi bi-eraser"></i></button>
+                                
+                                {/* <Link
                                   className="btn btn-danger"
                                   to={`/removecontact/${obs.id}`}
                                 >
                                 <i class="bi bi-eraser"></i>
-                                </Link>
+                                </Link> */}
                            
 
                           </td>
