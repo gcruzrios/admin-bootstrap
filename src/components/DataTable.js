@@ -90,7 +90,7 @@ const DataTable = () => {
             <div className="col-lg-12">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Datatables</h5>
+                  <h5 className="card-title">Contactos registrados en BD</h5>
                   
 
                   {/* <!-- Table with stripped rows --> */}
@@ -120,25 +120,25 @@ const DataTable = () => {
                             
                                 <Link
                                   className="btn btn-info"
-                                  to={`/detalle/${obs.id}`}
+                                  to={`/detailcontact/${obs.id}`}
                                 >
                                   {" "}
-                                  Detalle
+                                  <i class="bi bi-eye"></i>
                                 </Link>
                               
                                 <Link
                                   className="btn btn-warning"
-                                  to={`/detalle/${obs.id}`}
+                                  to={`/editcontact/${obs.id}`}
                                 >
                                   
-                                  Editar
+                                  <i class="bi bi-pencil-square"></i>
                                 </Link>
                               
                                 <Link
                                   className="btn btn-danger"
-                                  to={`/remove/${obs.id}`}
+                                  to={`/removecontact/${obs.id}`}
                                 >
-                                  Borrar
+                                <i class="bi bi-eraser"></i>
                                 </Link>
                            
 

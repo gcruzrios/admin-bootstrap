@@ -14,6 +14,10 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import AddContact from './pages/AddContact';
+import DetalleContact from './pages/DetalleContact';
+import EditContact from './pages/EditContact';
+
 
 const estaAutenticado = () => {
   const token = localStorage.getItem("Token");
@@ -42,9 +46,9 @@ function App() {
                        
           /> */}
           <Route path="/index" exact element={estaAutenticado() ? <Index /> : <Navigate to="/" />} />
-
-          
-         
+          <Route path="/addcontact" exact element={estaAutenticado() ? <AddContact/> : <Navigate to="/" />} />
+          <Route path="/editcontact/:id" exact element={estaAutenticado() ? <EditContact/> : <Navigate to="/" />} />
+          <Route path="/detailcontact/:id" exact element={estaAutenticado() ? <DetalleContact/> : <Navigate to="/" />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
