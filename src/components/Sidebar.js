@@ -26,53 +26,58 @@ const Sidebar = () => {
 
      
       <li className="nav-heading">Pages</li>
-
+      <li className="nav-item">
+        <a className="nav-link " href="/index">
+        <i class="bi bi-people-fill"></i>
+          <span>Contactos</span>
+        </a>
+      </li>
       <li className="nav-item">
         <a className="nav-link collapsed" href="/addcontact">
-          <i className="bi bi-person"></i>
+        <i class="bi bi-person-plus-fill"></i>
           <span>Agregar Contacto</span>
         </a>
       </li>
       {/* <!-- End Profile Page Nav --> */}
 
       <li className="nav-item">
-        <a className="nav-link collapsed" href="pages-faq.html">
-          <i className="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
+        <a className="nav-link collapsed" href="/usuarios">
+        <i class="bi bi-people-fill"></i>
+          <span>Lista de Usuarios</span>
         </a>
       </li>
       {/* <!-- End F.A.Q Page Nav --> */}
 
       <li className="nav-item">
         <a className="nav-link collapsed" href="pages-contact.html">
-          <i className="bi bi-envelope"></i>
-          <span>Contact</span>
+        <i class="bi bi-person-plus-fill"></i>
+          <span>Agregar Usuario</span>
         </a>
       </li>
       {/* <!-- End Contact Page Nav --> */}
 
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <a className="nav-link collapsed" href="pages-register.html">
           <i className="bi bi-card-list"></i>
           <span>Register</span>
         </a>
-      </li>
+      </li> */}
       {/* <!-- End Register Page Nav --> */}
 
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <a className="nav-link collapsed" href="pages-login.html">
           <i className="bi bi-box-arrow-in-right"></i>
           <span>Login</span>
         </a>
-      </li>
+      </li> */}
       {/* <!-- End Login Page Nav --> */}
 
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <a className="nav-link collapsed" href="pages-error-404.html">
           <i className="bi bi-dash-circle"></i>
           <span>Error 404</span>
         </a>
-      </li>
+      </li> */}
       {/* <!-- End Error 404 Page Nav --> */}
 
       <li className="nav-item">
