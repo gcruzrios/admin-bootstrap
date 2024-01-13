@@ -49,7 +49,7 @@ const Sidebar = () => {
       {/* <!-- End F.A.Q Page Nav --> */}
 
       <li className="nav-item">
-        <a className="nav-link collapsed" href="pages-contact.html">
+        <a className="nav-link collapsed" href="/addusuario">
         <i class="bi bi-person-plus-fill"></i>
           <span>Agregar Usuario</span>
         </a>
