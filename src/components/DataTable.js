@@ -120,7 +120,7 @@ const DataTable = () => {
                     </thead>
                     <tbody>
                       {selectedItems.map((obs) => (
-                        <tr key={obs.idOrganizacion}>
+                        <tr key={obs.id}>
                           <th scope="row">{obs.id}</th>
                           <td>{obs.nombre}</td>
                           <td>{obs.telefono}</td>

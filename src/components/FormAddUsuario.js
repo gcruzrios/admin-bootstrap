@@ -103,7 +103,7 @@ const FormAddContact = () => {
                         Role
                       </label>
                       <div className="col-sm-10">
-                        <select id="Role" class="form-select"  onChange={(e) => setRole(e.target.value)}>
+                        <select id="Role" className="form-select"  onChange={(e) => setRole(e.target.value)}>
                           <option value="0000" selected>Escoja la opción</option>
                           <option value="Admin">Admin</option>
                           <option value="Sales">Sales</option>
