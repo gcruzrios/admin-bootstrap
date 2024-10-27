@@ -7,21 +7,22 @@ import { useParams } from 'react-router-dom';
 const FormAddContact = () => {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [celular, setCelular] = useState("");
   const [email, setEmail] = useState("");
+  const [empresa, setEmpresa] = useState("");
 
   const [data, setData] = useState(Object);
   const { id } = useParams();
 
   const GetContact = async () => {
 
-    const response = await axios.get(`/api/contactos/${id}`);
+    const response = await axios.get(`/api/contacto/obtenercontacto/${id}`);
+    
     const mensaje = response.data;
-    setData(mensaje);
-    setNombre(mensaje.nombre);
-    setTelefono(mensaje.telefono);
-    setCelular(mensaje.celular);
-    setEmail(mensaje.email);
+    
+    setNombre(mensaje[0].nombre);
+    setTelefono(mensaje[0].telefono);
+    setEmail(mensaje[0].email);
+    setEmpresa(mensaje[0].empresa); 
         
     console.log(mensaje);
     
@@ -33,7 +34,7 @@ const FormAddContact = () => {
 //    const token = data.Token;
 //    localStorage.setItem("Token", token);
 
-    const contacto = { nombre, telefono, celular, email };
+    const contacto = { nombre, telefono, email, empresa };
     
     console.log(contacto);
 
@@ -41,9 +42,10 @@ const FormAddContact = () => {
     //     "Content-Type": "application/json", headers: { Authorization: 'No Auth' } 
     // });
 
-    const response = await axios.put(`/api/contactos/${id}`, contacto);
+    //const response = await axios.put(`/api/contactos/${id}`, contacto);
 
-    
+    const response = await axios.put(`/api/contacto/actualizarcontacto/${id}`, contacto);
+
     
 
     const respuesta = response.data;
@@ -119,17 +121,7 @@ const FormAddContact = () => {
                         <input type="text" className="form-control" value={telefono}  onChange={(e) => setTelefono(e.target.value)} />
                       </div>
                     </div>
-                    <div className="row mb-3">
-                      <label
-                        for="inputEmail"
-                        className="col-sm-2 col-form-label"
-                      >
-                        Celular
-                      </label>
-                      <div className="col-sm-10">
-                        <input type="text" className="form-control" value={celular} onChange={(e) => setCelular(e.target.value)}/>
-                      </div>
-                    </div>
+                   
                     <div className="row mb-3">
                       <label
                         for="inputEmail"
@@ -139,6 +131,17 @@ const FormAddContact = () => {
                       </label>
                       <div className="col-sm-10">
                         <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                      </div>
+                    </div>
+                    <div className="row mb-3">
+                      <label
+                        for="inputEmail"
+                        className="col-sm-2 col-form-label"
+                      >
+                        Empresa
+                      </label>
+                      <div className="col-sm-10">
+                        <input type="text" className="form-control" value={empresa} onChange={(e) => setEmpresa(e.target.value)}/>
                       </div>
                     </div>
                     {/* <div className="row mb-3">

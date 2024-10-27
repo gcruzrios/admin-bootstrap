@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+const role = localStorage.getItem("role");
 const Sidebar = () => {
   return (
     <div>
@@ -39,21 +41,23 @@ const Sidebar = () => {
         </a>
       </li>
       {/* <!-- End Profile Page Nav --> */}
-
+      { role ==="Admin" ? 
       <li className="nav-item">
         <a className="nav-link collapsed" href="/usuarios">
         <i class="bi bi-people-fill"></i>
           <span>Lista de Usuarios</span>
         </a>
-      </li>
+      </li> : ""} 
+    
       {/* <!-- End F.A.Q Page Nav --> */}
-
+      { role ==="Admin" ? 
       <li className="nav-item">
         <a className="nav-link collapsed" href="/addusuario">
         <i class="bi bi-person-plus-fill"></i>
           <span>Agregar Usuario</span>
         </a>
       </li>
+      : ""} 
       {/* <!-- End Contact Page Nav --> */}
 
       {/* <li className="nav-item">

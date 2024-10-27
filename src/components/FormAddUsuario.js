@@ -4,20 +4,22 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const FormAddContact = () => {
-  const [nombreUsuario, setNombreUsuario] = useState("");
+  const [nombre, setNombre] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  
+  const [telefono, setTelefono] = useState("");
   
   const handleAdd = async (e) => {
     e.preventDefault();
 
-    const usuario = { nombreUsuario, email, password, role };
+    const usuario = { nombre, email, telefono, password, role };
+
 
     console.log(usuario);
 
-    const response = await axios.post(`/api/usuarios`, usuario);
+    const response = await axios.post(`/api/usuario/agregarusuario`, usuario);
+    
     const mensaje = response.data;
     console.log(mensaje);
 
@@ -40,7 +42,7 @@ const FormAddContact = () => {
     <div>
       <main id="main" className="main">
         <div className="pagetitle">
-          <h1>Agregar Contacto</h1>
+          <h1>Agregar Usuarios</h1>
           <nav>
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
@@ -70,7 +72,7 @@ const FormAddContact = () => {
                         Nombre Usuario
                       </label>
                       <div className="col-sm-10">
-                        <input type="text" className="form-control"  onChange={(e) => setNombreUsuario(e.target.value)}/>
+                        <input type="text" className="form-control"  onChange={(e) => setNombre(e.target.value)}/>
                       </div>
                     </div>
                     <div className="row mb-3">
@@ -82,6 +84,17 @@ const FormAddContact = () => {
                       </label>
                       <div className="col-sm-10">
                         <input type="text" className="form-control"  onChange={(e) => setEmail(e.target.value)} />
+                      </div>
+                    </div>
+                    <div className="row mb-3">
+                      <label
+                        for="inputEmail"
+                        className="col-sm-2 col-form-label"
+                      >
+                        Telefono
+                      </label>
+                      <div className="col-sm-10">
+                        <input type="text" className="form-control"  onChange={(e) => setTelefono(e.target.value)} />
                       </div>
                     </div>
                     <div className="row mb-3">

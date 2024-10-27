@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 const FormAddContact = () => {
   const [nombre, setNombre] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [celular, setCelular] = useState("");
   const [email, setEmail] = useState("");
+  const [empresa, setEmpresa] = useState("");
+
+  const usuario = localStorage.getItem("idUsuario");
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -15,7 +17,7 @@ const FormAddContact = () => {
 //    const token = data.Token;
 //    localStorage.setItem("Token", token);
 
-    const contacto = { nombre, telefono, celular, email };
+    const contacto = { nombre, telefono, empresa, email, usuario };
     
     console.log(contacto);
 
@@ -23,8 +25,7 @@ const FormAddContact = () => {
     //     "Content-Type": "application/json", headers: { Authorization: 'No Auth' } 
     // });
 
-    const response = await axios.post(`/api/contactos`, contacto);
-
+    const response = await axios.post(`/api/contacto/agregarcontacto`, contacto);
     
     
 
@@ -94,17 +95,7 @@ const FormAddContact = () => {
                         <input type="text" className="form-control"  onChange={(e) => setTelefono(e.target.value)} />
                       </div>
                     </div>
-                    <div className="row mb-3">
-                      <label
-                        for="inputEmail"
-                        className="col-sm-2 col-form-label"
-                      >
-                        Celular
-                      </label>
-                      <div className="col-sm-10">
-                        <input type="text" className="form-control"  onChange={(e) => setCelular(e.target.value)}/>
-                      </div>
-                    </div>
+                   
                     <div className="row mb-3">
                       <label
                         for="inputEmail"
@@ -116,13 +107,18 @@ const FormAddContact = () => {
                         <input type="email" className="form-control"  onChange={(e) => setEmail(e.target.value)}/>
                       </div>
                     </div>
-                    {/* <div className="row mb-3">
-              <label for="inputPassword" className="col-sm-2 col-form-label">Password</label>
-              <div className="col-sm-10">
-                <input type="password" className="form-control"/>
-              </div>
-            </div> */}
-
+                    
+                    <div className="row mb-3">
+                      <label
+                        for="inputEmail"
+                        className="col-sm-2 col-form-label"
+                      >
+                        Empresa
+                      </label>
+                      <div className="col-sm-10">
+                        <input type="text" className="form-control"  onChange={(e) => setEmpresa(e.target.value)}/>
+                      </div>
+                    </div>
                     <div className="row mb-3">
                       <label className="col-sm-2 col-form-label">
                         Submit Button

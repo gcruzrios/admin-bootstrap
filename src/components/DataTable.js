@@ -10,9 +10,9 @@ const DataTable = () => {
     id: 1,
     nombre: "",
     telefono: "",
-    celular: "",
     email: "",
-    fechaCreacion: "0001-01-01T00:00:00",
+    empresa:"",
+    usuario:""
   });
 
   // jefe:localStor
@@ -21,17 +21,18 @@ const DataTable = () => {
   const [data, setData] = useState([]);
 
   const peticionGet = async () => {
-    //const idUsuario = localStorage.getItem('idUsuario');
+    const idUsuario = localStorage.getItem('idUsuario');
 
-    await axios.get("/api/contactos").then((response) => {
-    
+    await axios.get(`api/contacto/obtenercontactos/${idUsuario}`).then((response) => {
       setData(response.data);
     });
   };
 
 
   const eliminar_completo = async (id) => {
-    const respuesta = await axios.delete(`api/contactos/${id}`);
+    console.log(id);
+    const respuesta = await axios.delete(`api/contacto/borrarcontacto/${id}`);
+
     peticionGet();
   }  
   const eliminar = async (id) => {
@@ -111,28 +112,29 @@ const DataTable = () => {
                       <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Telefono</th>
-                        <th scope="col">Celular</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Fecha</th>
+                        <th scope="col">Telefono</th>
+                        
+                        <th scope="col">Empresa</th>
                         <th scope="col">Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {selectedItems.map((obs) => (
-                        <tr key={obs.id}>
-                          <th scope="row">{obs.id}</th>
+                      {selectedItems.map((obs,i) => (
+                        <tr key={obs._id}>
+                          <th scope="row">{i}</th>
                           <td>{obs.nombre}</td>
-                          <td>{obs.telefono}</td>
-                          <td>{obs.celular}</td>
                           <td>{obs.email}</td>
-                          <td>{obs.fechaCreacion}</td>
+                          
+                          <td>{obs.telefono}</td>
+                          
+                          <td>{obs.empresa}</td>
 
                           <td>
                             
                                 <Link
                                   className="btn btn-info"
-                                  to={`/detailcontact/${obs.id}`}
+                                  to={`/detailcontact/${obs._id}`}
                                 >
                                   {" "}
                                   <i class="bi bi-eye"></i>
@@ -140,13 +142,13 @@ const DataTable = () => {
                               
                                 <Link
                                   className="btn btn-warning"
-                                  to={`/editcontact/${obs.id}`}
+                                  to={`/editcontact/${obs._id}`}
                                 >
                                   
                                   <i class="bi bi-pencil-square"></i>
                                 </Link>
                               
-                                <button className="btn btn-danger" onClick={()=>eliminar(obs.id)}><i class="bi bi-eraser"></i></button>
+                                <button className="btn btn-danger" onClick={()=>eliminar(obs._id)}><i class="bi bi-eraser"></i></button>
                                 
                                 {/* <Link
                                   className="btn btn-danger"

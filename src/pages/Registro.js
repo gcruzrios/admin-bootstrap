@@ -1,6 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Registro = () => {
+
+  const [nombre, setNombre] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+
+    const usuario = { nombre, email, telefono, password, role };
+
+    console.log(usuario);
+
+    const response = await axios.post(`/api/usuario/agregarusuario`, usuario);
+    const mensaje = response.data;
+    console.log(mensaje);
+
+    if (password === cpassword){
+    
+      if (mensaje === null) {
+        Swal.fire({
+          text: "Error insertando usuario..",
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          text: "Usuario insertado con éxito..",
+          icon: "success",
+        });
+
+        const ingreso = { email, password };
+        console.log(ingreso);
+        const response = await axios.post(`/api/usuario/login`, ingreso);
+        const mensaje = response.data;
+        const token = response.data.token;
+        const id_usuario = response.data.id;
+        const nombre_usuario = response.data.nombre;
+        const role_usuario = response.data.role;
+        localStorage.setItem('Token', token);
+        localStorage.setItem('idUsuario', id_usuario);
+        localStorage.setItem('nombreUsuario', nombre_usuario);
+        localStorage.setItem('role', role_usuario);
+        window.location.href = "/index";
+      }
+    }else{
+      Swal.fire({
+        text: "Error Passwords no coinciden",
+        icon: "error",
+      });
+    }
+
+    
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+
   return (
     <div>
       <main>
@@ -24,17 +91,17 @@ const Registro = () => {
                     <div className="card-body">
                       <div className="pt-4 pb-2">
                         <h5 className="card-title text-center pb-0 fs-4">
-                          Create an Account
+                          Crear una cuenta
                         </h5>
                         <p className="text-center small">
-                          Enter your personal details to create account
+                          Ingrese sus datos personales
                         </p>
                       </div>
 
                       <form className="row g-3 needs-validation" novalidate>
                         <div className="col-12">
                           <label for="yourName" className="form-label">
-                            Your Name
+                            Nombre
                           </label>
                           <input
                             type="text"
@@ -42,6 +109,7 @@ const Registro = () => {
                             className="form-control"
                             id="yourName"
                             required
+                            onChange={(e) => setNombre(e.target.value)}
                           />
                           <div className="invalid-feedback">
                             Please, enter your name!
@@ -50,7 +118,7 @@ const Registro = () => {
 
                         <div className="col-12">
                           <label for="yourEmail" className="form-label">
-                            Your Email
+                            Email
                           </label>
                           <input
                             type="email"
@@ -58,9 +126,27 @@ const Registro = () => {
                             className="form-control"
                             id="yourEmail"
                             required
+                            onChange={(e) => setEmail(e.target.value)}
                           />
                           <div className="invalid-feedback">
                             Please enter a valid Email adddress!
+                          </div>
+                        </div>
+
+                        <div className="col-12">
+                          <label for="yourEmail" className="form-label">
+                            Telefono
+                          </label>
+                          <input
+                            type="text"
+                            name="phone"
+                            className="form-control"
+                            id="yourPhone"
+                            required
+                            onChange={(e) => setTelefono(e.target.value)}
+                          />
+                          <div className="invalid-feedback">
+                            Please enter a valid Phone!
                           </div>
                         </div>
 
@@ -75,6 +161,7 @@ const Registro = () => {
                             className="form-control"
                             id="yourPassword"
                             required
+                            onChange={(e) => setPassword(e.target.value)}
                           />
                           <div className="invalid-feedback">
                             Please enter your password!
@@ -90,13 +177,28 @@ const Registro = () => {
                             name="password"
                             className="form-control"
                             id="confirmPassword"
+                            onChange={(e) => setCpassword(e.target.value)}
                             required
                           />
                           <div className="invalid-feedback">
                             Please confirm your password!
                           </div>
                         </div>
+                        <div className="col-12">
+                          <label for="confirmPassword" className="form-label">
+                            Role
+                          </label>
+                          <select id="Role" className="form-select"  onChange={(e) => setRole(e.target.value)}>
+                          <option value="0000" selected>Escoja la opción</option>
+                          <option value="User">User</option>
+                          <option value="Sales">Sales</option>
+                          <option value="IT">IT</option>
+                        </select>
 
+                          <div className="invalid-feedback">
+                            Please confirm your password!
+                          </div>
+                        </div>
                         <div className="col-12">
                           <div className="form-check">
                             <input
@@ -120,12 +222,11 @@ const Registro = () => {
                           </div>
                         </div>
                         <div className="col-12">
-                          <button
-                            className="btn btn-primary w-100"
-                            type="submit"
-                          >
-                            Create Account
-                          </button>
+                          
+
+                          <button className="btn btn-primary" onClick={handleAdd}>
+                          Agregar Usuario
+                        </button>
                         </div>
                         <div className="col-12">
                           <p className="small mb-0">

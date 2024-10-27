@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
 const FormDetalleContact = () => {
-
+  const [nombre, setNombre] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [celular, setCelular] = useState("");
+  const [email, setEmail] = useState("");
+  const [empresa, setEmpresa] = useState("");
   const [data, setData] = useState(Object);
   const { id } = useParams();
   //console.log(id);
@@ -20,9 +24,13 @@ const FormDetalleContact = () => {
 
     const GetContact = async () => {
 
-    const response = await axios.get(`/api/contactos/${id}`);
+    const response = await axios.get(`/api/contacto/obtenercontacto/${id}`);
     const mensaje = response.data;
-    setData(mensaje);
+    setNombre(mensaje[0].nombre);
+    setTelefono(mensaje[0].telefono);
+    setCelular(mensaje[0].celular);
+    setEmail(mensaje[0].email);
+    setEmpresa(mensaje[0].empresa); 
     console.log(mensaje);
     
      }
@@ -81,7 +89,7 @@ const FormDetalleContact = () => {
                         Nombre
                       </label>
                       <div className="col-sm-10">
-                        <input type="text" className="form-control" readOnly disabled value={data.nombre}/>
+                        <input type="text" className="form-control" readOnly disabled value={nombre}/>
                       </div>
                     </div>
                     <div className="row mb-3">
@@ -92,20 +100,10 @@ const FormDetalleContact = () => {
                         Teléfono
                       </label>
                       <div className="col-sm-10">
-                        <input type="text" className="form-control" readOnly disabled value={data.telefono} />
+                        <input type="text" className="form-control" readOnly disabled value={telefono} />
                       </div>
                     </div>
-                    <div className="row mb-3">
-                      <label
-                        for="inputEmail"
-                        className="col-sm-2 col-form-label"
-                      >
-                        Celular
-                      </label>
-                      <div className="col-sm-10">
-                        <input type="text" className="form-control" readOnly disabled value={data.celular}/>
-                      </div>
-                    </div>
+                    
                     <div className="row mb-3">
                       <label
                         for="inputEmail"
@@ -114,10 +112,20 @@ const FormDetalleContact = () => {
                         Email
                       </label>
                       <div className="col-sm-10">
-                        <input type="email" className="form-control" readOnly disabled value={data.email}/>
+                        <input type="email" className="form-control" readOnly disabled value={email}/>
                       </div>
                     </div>
-                   
+                    <div className="row mb-3">
+                      <label
+                        for="inputEmail"
+                        className="col-sm-2 col-form-label"
+                      >
+                        Empresa
+                      </label>
+                      <div className="col-sm-10">
+                        <input type="text" className="form-control" readOnly disabled value={empresa}/>
+                      </div>
+                    </div>
 
                     <div className="row mb-3">
                       <label className="col-sm-2 col-form-label">

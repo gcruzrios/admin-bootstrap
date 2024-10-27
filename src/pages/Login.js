@@ -38,9 +38,9 @@ const Login = () => {
     //     "Content-Type": "application/json", headers: { Authorization: 'No Auth' } 
     // });
 
-    const response = await axios.post(`/api/login`, ingreso);
+   
+    const response = await axios.post(`/api/usuario/login`, ingreso);
 
-    
     
 
     const mensaje = response.data;
@@ -53,9 +53,14 @@ const Login = () => {
         icon: "error",
       });
     } else {
-      const token = response.data;
-
+      const token = response.data.token;
+      const id_usuario = response.data.id;
+      const nombre_usuario = response.data.nombre;
+      const role_usuario = response.data.role;
       localStorage.setItem('Token', token);
+      localStorage.setItem('idUsuario', id_usuario);
+      localStorage.setItem('nombreUsuario', nombre_usuario);
+      localStorage.setItem('role', role_usuario);
 
       window.location.href = "/index";
     }
